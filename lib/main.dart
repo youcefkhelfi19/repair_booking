@@ -12,9 +12,14 @@ import 'firebase_options.dart';
 import 'helper/app_routes.dart';
 import 'helper/app_themes.dart';
 import 'helper/global_constants.dart';
-import 'services/firebase_notification.dart';
 import 'services/messages.dart';
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message)async{
+try{
 
+}catch(e){
+  print('excepton $e');
+}
+}
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -23,7 +28,7 @@ void main()async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   await FirebaseMessaging.instance.getInitialMessage();
   await FirebaseMessaging.instance.subscribeToTopic("coworkers");
-  FirebaseMessaging.onBackgroundMessage(NotificationsService().firebaseMessagingBackgroundHandler);  runApp( RepairBooking(
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);  runApp( RepairBooking(
     languages: languages,
   ));
 

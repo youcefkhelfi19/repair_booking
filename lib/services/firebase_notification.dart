@@ -15,10 +15,7 @@ import '../models/device_model.dart';
 import '../presentation/screens/device_details.dart';
 class NotificationsService{
   FirebaseDatabase database = FirebaseDatabase.instance;
-  Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message)async{
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
 
-  }
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   void requestPermission()async{
     FirebaseMessaging  messaging = FirebaseMessaging.instance;
