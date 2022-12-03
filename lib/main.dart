@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import 'firebase_options.dart';
 import 'helper/app_routes.dart';
 import 'helper/app_themes.dart';
 import 'helper/global_constants.dart';
+import 'services/firebase_notification.dart';
 import 'services/messages.dart';
 
 void main()async {
@@ -19,8 +21,9 @@ void main()async {
   Map<String, Map<String, String>> languages =await deps.init();
   await GetStorage.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-  //FirebaseMessaging.onBackgroundMessage(NotificationsService().firebaseMessagingBackgroundHandler);
-  runApp( RepairBooking(
+  await FirebaseMessaging.instance.getInitialMessage();
+  await FirebaseMessaging.instance.subscribeToTopic("coworkers");
+  FirebaseMessaging.onBackgroundMessage(NotificationsService().firebaseMessagingBackgroundHandler);  runApp( RepairBooking(
     languages: languages,
   ));
 

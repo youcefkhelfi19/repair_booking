@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import '../../models/device_model.dart';
 import '../../models/store_model.dart';
@@ -11,8 +10,7 @@ class PdfReceiptApi {
   static Future<File> generate(
       {required Device device, required Store store}) async {
     final pdf = pw.Document();
-    Timestamp postedDateTimeStamp = device.dateTime;
-    var postIn = postedDateTimeStamp.toDate();
+    var postIn = DateTime.parse(device.dateTime);
     String postedDate = '${postIn.year}.${postIn.month}.${postIn.day}';
     String postedTime = '${postIn.hour}: ${postIn.minute}';
     var data = await rootBundle.load("assets/fonts/Montserrat-Medium.ttf");

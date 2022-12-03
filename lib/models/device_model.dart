@@ -28,7 +28,7 @@ class Device {
     required this.accessories,
     required this.cancelledNote,
     required this.inProgressNote,
-    required this.returnedNote,
+    required this.returnedNote
 
   });
 
@@ -45,7 +45,7 @@ class Device {
   String phone;
   String address;
   String uploadedBy;
-  Timestamp dateTime;
+  String dateTime;
   String repairingPrice;
   String completedNote;
   String storingStatus;
@@ -79,6 +79,7 @@ class Device {
       inProgressNote: json["progress_note"],
       returnedNote: json["returned_note"]
 
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -102,6 +103,7 @@ class Device {
     "price":repairingPrice,
     "cancelled_note":cancelledNote,
     "progress_note":inProgressNote,
-    "returned_note":returnedNote,
+    "returned_note":returnedNote
+
   };
 }

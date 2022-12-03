@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ionicons/ionicons.dart';
@@ -325,7 +324,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
               }else{
                 firebaseController.updateField(
                     fieldValue: value.toString(),
-                    id: widget.device.deviceId,
+                    device: widget.device,
                     field: 'storing').then((response){
                   if(response == true){
 
@@ -490,8 +489,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     );
   }
   handleDate() {
-    Timestamp postedDateTimeStamp = widget.device.dateTime;
-    var postIn = postedDateTimeStamp.toDate();
+    var postIn = DateTime.parse(widget.device.dateTime);
     postedDate = '${postIn.year}.${postIn.month}.${postIn.day}';
     postedTime = '${postIn.hour}: ${postIn.minute}';
   }
@@ -518,9 +516,9 @@ class _DeviceDetailsState extends State<DeviceDetails> {
         onTap:(){
 
           firebaseController.updateField(
-              fieldValue:returnedNoteController.text, id: widget.device.deviceId, field: 'returned_note').
+              fieldValue:returnedNoteController.text, device: widget.device, field: 'returned_note').
           whenComplete(() => firebaseController.updateField(
-              fieldValue:'Pending', id: widget.device.deviceId, field: 'repairing')).then((value) {
+              fieldValue:'Pending', device: widget.device, field: 'repairing')).then((value) {
             setState(() {
               repairingStatus = 'Pending';
             });
