@@ -17,7 +17,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message)async{
 try{
 
 }catch(e){
-  print('excepton $e');
+  debugPrint('exception $e');
 }
 }
 void main()async {
@@ -27,8 +27,8 @@ void main()async {
   await GetStorage.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   await FirebaseMessaging.instance.getInitialMessage();
-  await FirebaseMessaging.instance.subscribeToTopic("coworkers");
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);  runApp( RepairBooking(
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  runApp( RepairBooking(
     languages: languages,
   ));
 
